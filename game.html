@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+</head>
+<body>
+    <script>
+
+/* PC CHOICE FUNCTION*/
+        function getComputerChoice() {
+            let x = Math.random();
+            if (x <= 0.33) {return "rock"}
+            else if (x > 0.33 && x <= 0.66) {return "paper"}
+            else if (x > 0.66) {return "scissors"}
+        }
+
+/* PLAYER CHOICE FUNCTION */
+        function getHumanChoice() {
+            let sign = prompt("Make your choice!");
+            /*NORMALISE*/
+            let choice = sign.toLowerCase();
+            return choice
+        }
+
+        /* PLAY A GAME */
+        function playGame() {
+
+            /* INITIALISING THE SCORES */
+            let userScore = 0;
+            let pcScore = 0;
+            
+            /* PLAY A ROUND */
+            function playRound() {
+                let computerChoice = getComputerChoice();
+                let humanChoice = getHumanChoice();
+                
+                if ((humanChoice == "rock" && computerChoice == "scissors") || (humanChoice == "paper" && computerChoice == "scissors") || (humanChoice == "scissors" && computerChoice == "paper"))  {
+                        console.log(`You won! ${humanChoice} beats ${computerChoice}`)
+                        userScore++
+                        console.log(`User: ${userScore}; PC: ${pcScore}`)
+                    }
+                else if ((computerChoice == "rock" && humanChoice == "scissors") || (computerChoice == "paper" && humanChoice == "scissors") || (computerChoice == "scissors" && humanChoice == "paper"))  {
+                        console.log(`You lost... ${humanChoice} loses against  ${computerChoice}`)
+                        pcScore++
+                        console.log(`User: ${userScore}; PC: ${pcScore}`)
+                    }
+                else {  
+                        console.log("It's a tie!")
+                        console.log(`User: ${userScore}; PC: ${pcScore}`)
+                    }
+            }
+
+            for (let i = 0; i < 5; i++) {
+                playRound()
+            }
+
+            let result = "";
+
+            if (userScore < pcScore) {
+                result = "lost"
+            } else if (userScore > pcScore) {
+                result = "won"
+            } else { result = "tied"}
+
+            console.log(`You ${result} with a score of ${userScore} to ${pcScore}`)
+        }
+
+    </script>
+</body>
+</html>
