@@ -19,6 +19,8 @@
 
     </div>
 
+    <div class="log"></div>
+
     <div class="results">
         <h3>Score:</h3>
         <ul>
@@ -33,8 +35,19 @@ const rockButton = document.querySelector(".rock");
 const paperButton = document.querySelector(".paper");
 const scissorsButton = document.querySelector(".scissors");
 const buttons = document.querySelectorAll("button");
-const uScore = document.querySelector("#userScore").textContent;
-const pScore = document.querySelector("#pcScore").textContent;
+const uScore = document.querySelector("#userScore");
+const pScore = document.querySelector("#pcScore");
+const log = document.querySelector(".log");
+const userLog = document.querySelector(".user");
+const pcLog = document.querySelector(".pc");
+
+/* CREATE RESET BUTTON */
+function reset() {
+    const resetButton = document.createElement("button");
+    resetButton.textContent = "Reset";
+    
+
+}
 
 
 /* PC CHOICE FUNCTION*/
@@ -61,21 +74,38 @@ function getHumanChoice(button) {
     function playRound(button) {
         let computerChoice = getComputerChoice();
         let humanChoice = getHumanChoice(button);
-
+    if (userScore < 5 && pcScore < 5) {
         if ((humanChoice == "rock" && computerChoice == "scissors") || (humanChoice == "paper" && computerChoice == "scissors") || (humanChoice == "scissors" && computerChoice == "paper"))  {
-                console.log(`You won! ${humanChoice} beats ${computerChoice}`)
+                console.log(`You won! ${humanChoice} beats ${computerChoice}`);
+                log.textContent = `You won! ${humanChoice} beats ${computerChoice}`;
                 userScore++
-                console.log(`User: ${userScore}; PC: ${pcScore}`)
+                console.log(`User: ${userScore}; PC: ${pcScore}`);
+                uScore.textContent = userScore;
             }
         else if ((computerChoice == "rock" && humanChoice == "scissors") || (computerChoice == "paper" && humanChoice == "scissors") || (computerChoice == "scissors" && humanChoice == "paper"))  {
-                console.log(`You lost... ${humanChoice} loses against  ${computerChoice}`)
+                console.log(`You lost... ${humanChoice} loses against  ${computerChoice}`);
+                log.textContent = `You lost... ${humanChoice} loses against  ${computerChoice}`;
                 pcScore++
-                console.log(`User: ${userScore}; PC: ${pcScore}`)
+                console.log(`User: ${userScore}; PC: ${pcScore}`);
+                pScore.textContent = pcScore;
             }
         else {  
                 console.log("It's a tie!")
                 console.log(`User: ${userScore}; PC: ${pcScore}`)
-            }
+                log.textContent = "It's a tie!"
+            }}
+    else if (userScore == 5) {
+        userLog.style.color = "green";
+        log.textContent = `Congrats! You won with a score of ${userScore} to ${pcScore}`;
+    
+    }
+    else if (pcScore == 5) {
+        pcLog.style.color = "red"
+        log.textContent = `Oh no! You lost with a score of ${userScore} to ${pcScore}`;
+    }
+
+        
+
     }
 
 rockButton.addEventListener('click', () => playRound(rockButton));
@@ -84,15 +114,15 @@ scissorsButton.addEventListener('click', () => playRound(scissorsButton));
 
 
 /* PLAY A GAME */
-function playGame() {
+// function playGame() {
 
-    /* INITIALISING THE SCORES */
-    let userScore = 0;
-    let pcScore = 0;
+//     /* INITIALISING THE SCORES */
+//     let userScore = 0;
+//     let pcScore = 0;
 
 
 
-}
+// }
 
 
 /*
