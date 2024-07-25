@@ -51,10 +51,11 @@ resetButton.disabled = true;
 
 /* PC CHOICE FUNCTION*/
 function getComputerChoice() {
-    let x = Math.random();
-    if (x <= 0.33) {return "rock"}
-    else if (x > 0.33 && x <= 0.66) {return "paper"}
-    else if (x > 0.66) {return "scissors"}
+    const max = 3;
+    var x = Math.floor(Math.random() * max);
+    if (x = 0) {return "rock"}
+    else if (x = 1) {return "paper"}
+    else if (x = 2) {return "scissors"}
 }
 
 let choice = "";
@@ -71,10 +72,10 @@ function getHumanChoice(button) {
 
     /* PLAY A ROUND */
     function playRound(button) {
-        let computerChoice = getComputerChoice();
-        let humanChoice = getHumanChoice(button);
         resetButton.disabled = false;
     if (userScore < 5 && pcScore < 5) {
+        let computerChoice = getComputerChoice();
+        let humanChoice = getHumanChoice(button);
         if ((humanChoice == "rock" && computerChoice == "scissors") || (humanChoice == "paper" && computerChoice == "scissors") || (humanChoice == "scissors" && computerChoice == "paper"))  {
                 console.log(`You won! ${humanChoice} beats ${computerChoice}`);
                 log.textContent = `You won! ${humanChoice} beats ${computerChoice}`;
