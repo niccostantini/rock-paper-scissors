@@ -4,18 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
+    <link href="./style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <div class="Header">
     <h1>Rock, Paper, Scissors</h1>
-    <p class="subtitle">A classic, by the_niccolo</p>
+    <p class="subtitle">A classic, by niccostantini</p>
     </div>
     
     <div class="ui">
-
+    <div class="left">
         <button class="select rock">Rock</button>
         <button class="select paper">Paper</button>
+    </div>
+    <div class="right">
         <button class="select scissors">Scissors</button>
+        <button class="reset">Reset</button>
+    </div>
 
     </div>
 
@@ -34,21 +39,15 @@
 const rockButton = document.querySelector(".rock");
 const paperButton = document.querySelector(".paper");
 const scissorsButton = document.querySelector(".scissors");
-const buttons = document.querySelectorAll("button");
+const selectButtons = document.querySelectorAll(".select");
 const uScore = document.querySelector("#userScore");
 const pScore = document.querySelector("#pcScore");
 const log = document.querySelector(".log");
 const userLog = document.querySelector(".user");
 const pcLog = document.querySelector(".pc");
+const resetButton = document.querySelector(".reset");
 
-/* CREATE RESET BUTTON */
-function reset() {
-    const resetButton = document.createElement("button");
-    resetButton.textContent = "Reset";
-    
-
-}
-
+resetButton.disabled = true;
 
 /* PC CHOICE FUNCTION*/
 function getComputerChoice() {
@@ -74,6 +73,7 @@ function getHumanChoice(button) {
     function playRound(button) {
         let computerChoice = getComputerChoice();
         let humanChoice = getHumanChoice(button);
+        resetButton.disabled = false;
     if (userScore < 5 && pcScore < 5) {
         if ((humanChoice == "rock" && computerChoice == "scissors") || (humanChoice == "paper" && computerChoice == "scissors") || (humanChoice == "scissors" && computerChoice == "paper"))  {
                 console.log(`You won! ${humanChoice} beats ${computerChoice}`);
@@ -94,14 +94,24 @@ function getHumanChoice(button) {
                 console.log(`User: ${userScore}; PC: ${pcScore}`)
                 log.textContent = "It's a tie!"
             }}
-    else if (userScore == 5) {
+    if (userScore == 5) {
         userLog.style.color = "green";
+        log.style.fontWeight = 700;
         log.textContent = `Congrats! You won with a score of ${userScore} to ${pcScore}`;
+        // rockButton.disabled = true;
+        // paperButton.disabled = true;
+        // scissorsButton.disabled = true;
+        selectButtons.forEach(function(node) {node.disabled = true})
     
     }
     else if (pcScore == 5) {
         pcLog.style.color = "red"
+        log.style.fontWeight = 700;
         log.textContent = `Oh no! You lost with a score of ${userScore} to ${pcScore}`;
+        // rockButton.disabled = true;
+        // paperButton.disabled = true;
+        // scissorsButton.disabled = true;
+        selectButtons.forEach(function(node) {node.disabled = true})
     }
 
         
@@ -111,42 +121,17 @@ function getHumanChoice(button) {
 rockButton.addEventListener('click', () => playRound(rockButton));
 paperButton.addEventListener('click', () => playRound(paperButton));
 scissorsButton.addEventListener('click', () => playRound(scissorsButton));
-
-
-/* PLAY A GAME */
-// function playGame() {
-
-//     /* INITIALISING THE SCORES */
-//     let userScore = 0;
-//     let pcScore = 0;
-
-
-
-// }
-
-
-/*
-            for (let i = 0; i < 5; i++) {
-                playRound()
-            }
-
-            let result = "";
-
-            if (userScore < pcScore) {
-                result = "lost"
-            } else if (userScore > pcScore) {
-                result = "won"
-            } else { result = "tied"}
-
-            console.log(`You ${result} with a score of ${userScore} to ${pcScore}`)
-        }
-
-        function countEven() {
-            for(let i = 2; i<11; i=i+2){
-                alert(`number ${i}`)
-            }
-        }
-*/
+resetButton.addEventListener('click', function() {
+    userScore = 0; pcScore = 0
+    pScore.textContent = pcScore;
+    uScore.textContent = userScore;
+    log.style.fontWeight = 400;
+    log.textContent = "You started a new game. Good luck!";
+    pcLog.style.color = "";
+    userLog.style.color = "";
+    selectButtons.forEach(function(node) {node.disabled = false});
+    resetButton.disabled = true;
+})
     </script>
 </body>
 </html>
