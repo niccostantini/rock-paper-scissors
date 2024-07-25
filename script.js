@@ -68,21 +68,17 @@ function getHumanChoice(button) {
     }
     if (userScore == 5) {
         userLog.style.color = "green";
+        userLog.style.fontWeight = 600;
         log.style.fontWeight = 700;
         log.textContent = `Congrats! You won with a score of ${userScore} to ${pcScore}`;
-        // rockButton.disabled = true;
-        // paperButton.disabled = true;
-        // scissorsButton.disabled = true;
         selectButtons.forEach(function(node) {node.disabled = true})
     
     }
     else if (pcScore == 5) {
         pcLog.style.color = "red"
+        pcLog.style.fontWeight = 600;
         log.style.fontWeight = 700;
         log.textContent = `Oh no! You lost with a score of ${userScore} to ${pcScore}`;
-        // rockButton.disabled = true;
-        // paperButton.disabled = true;
-        // scissorsButton.disabled = true;
         selectButtons.forEach(function(node) {node.disabled = true})
     }
 
@@ -98,6 +94,8 @@ resetButton.addEventListener('click', function() {
     pScore.textContent = pcScore;
     uScore.textContent = userScore;
     log.style.fontWeight = 400;
+    userLog.style.fontWeight = 400;
+    pcLog.style.fontWeight = 400;
     log.textContent = "You started a new game. Good luck!";
     pcLog.style.color = "";
     userLog.style.color = "";
